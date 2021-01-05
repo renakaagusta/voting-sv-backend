@@ -33,11 +33,7 @@ var ip = [
 
 // Handle login actions
 exports.login = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-
-    return res.status(500).send();
-  }
+  
   Setting.find(
     {
       "authentication.username": req.body.username,
