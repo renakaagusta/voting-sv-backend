@@ -13,6 +13,9 @@ var participantSchema = mongoose.Schema({
     email: {
         type: String,
     },
+    jurusan: {
+        type: String,
+    },
     email_at: {
         type: Date,
     },

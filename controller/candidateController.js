@@ -68,15 +68,12 @@ exports.index = function (req, res) {
 
 // Handle create actions
 exports.new = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-
-    return res.status(500).send();
-  }
+  
   var candidate = new Candidate();
   candidate.type = req.body.type;
   candidate.name = req.body.name;
   candidate.number = req.body.number;
+  candidate.jurusan = req.body.jurusan;
   candidate.image = "avatar.jpg";
   candidate.cv = " ";
   candidate.description.short = req.body.shortDescription;
@@ -106,11 +103,7 @@ exports.view = function (req, res) {
 
 // Handle update actions
 exports.update = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-
-    return res.status(500).send();
-  }
+  
   id = req.params.id;
   Candidate.findOneAndUpdate(
     { _id: id },
@@ -147,11 +140,7 @@ exports.update = function (req, res) {
 
 // Handle upload actions
 exports.upload = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-
-    return res.status(500).send();
-  }
+  
   type = req.body.type;
   id = req.params.id;
   upload(req, res, (err) => {
@@ -180,11 +169,7 @@ exports.upload = function (req, res) {
 
 // Handle count actions
 exports.count = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-
-    return res.status(500).send();
-  }
+  
   Candidate.findById(req.body.id, function (err, candidate) {
     if (err) throw err;
     candidate.total_vote++;
@@ -209,11 +194,7 @@ exports.count = function (req, res) {
 
 // Handle delete actions
 exports.delete = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-
-    return res.status(500).send();
-  }
+  
   Candidate.remove(
     {
       _id: req.params.id,

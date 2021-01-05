@@ -52,11 +52,7 @@ exports.index = function (req, res) {
 
 // Handle search actions
 exports.search = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-
-    return res.status(500).send();
-  }
+  
   Participant.find(
     {
       name: {
@@ -84,11 +80,7 @@ exports.search = function (req, res) {
 
 // Handle index actions
 exports.indexByPage = async function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-
-    return res.status(500).send();
-  }
+  
   var page = req.params.page;
   try {
     var totalParticipant = await Participant.count();
@@ -124,14 +116,11 @@ exports.view = function (req, res) {
 
 // Handle create actions
 exports.new = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-
-    return res.status(500).send();
-  }
+  
   var participant = new Participant();
   participant.name = req.body.name;
-  participant.nim = req.body.nim;
+  participant.nim = req.body.nim;  
+  participant.jurusan = req.body.jurusan;
   participant.email = req.body.email;
   participant.session.id = req.body.sessionId;
   participant.session.number = req.body.sessionNumber;
