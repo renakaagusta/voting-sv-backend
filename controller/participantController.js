@@ -274,7 +274,7 @@ exports.delete = function (req, res) {
   
   
   Participant.findById(req.params.id, function (err, participant) {
-    if (err) return res.send(err);
+    if (err) return res.send(err);console.log(participant)
 
     Session.findById(participant.session.id, function (err, session) {
       if (err) throw err;console.log(session)
