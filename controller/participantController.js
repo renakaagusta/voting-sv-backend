@@ -277,6 +277,7 @@ exports.delete = function (req, res) {
     if (err) return res.send(err);
 
     Session.findById(participant.session.id, function (err, session) {
+      console.log(err)
       if (err) throw err;
       session.total_participant--;
       console.log("sessions id:" + session._id);
