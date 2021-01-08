@@ -153,7 +153,6 @@ exports.new = function (req, res) {
 // Handle update actions
 exports.update = function (req, res) {
   
-  
   var moveSession = false;
   var oldSession = {};
   var newSession = {};
