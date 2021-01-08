@@ -5674,9 +5674,11 @@ exports.new = function (req, res) {
 
     // Save and validate
     participant.save(function (err) {
+      console.log(err)
       if (err) return res.status(500).json(err);
 
       Session.findById(participant.session.id, function (err, session) {
+        console.log(err)
         if (err) return res.status(500).json(err);
         session.total_participant++;
         Session.findOneAndUpdate({ _id: session._id }, { $set: session }).then(
