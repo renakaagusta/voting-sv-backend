@@ -4,6 +4,7 @@ Candidate = require("../model/candidateModel");
 Session = require("../model/sessionModel");
 
 var ip = [
+  "36.81.8.10",
   "103.23.224.177",
   "114.125.125.183",
   "125.166.133.76",
