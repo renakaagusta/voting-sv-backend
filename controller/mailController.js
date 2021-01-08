@@ -58,7 +58,7 @@ exports.send = function (req, res) {
         {
           filename: "Tata Cara Pemilihan PEMIRA SV UNS 2021.pdf",
           contentType: "application/pdf",
-          path: "http://52.163.218.138/procedure.pdf",
+          path: "http://pemira.svuns.com/procedure.pdf",
         },
       ],
     };
