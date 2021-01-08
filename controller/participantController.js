@@ -32,6 +32,7 @@ var ip = [
 
 // Handle index actions
 exports.index = function (req, res) {
+  
   Participant.get(function (err, participants) {
     if (err) {
       return res.json({
@@ -80,7 +81,11 @@ exports.search = function (req, res) {
 
 // Handle index actions
 exports.indexByPage = async function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   var page = req.params.page;
   try {
     var totalParticipant = await Participant.count();
@@ -116,7 +121,11 @@ exports.view = function (req, res) {
 
 // Handle create actions
 exports.new = function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   var participant = new Participant();
   participant.name = req.body.name;
   participant.nim = req.body.nim;  
@@ -152,7 +161,11 @@ exports.new = function (req, res) {
 
 // Handle update actions
 exports.update = function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   var moveSession = false;
   var oldSession = {};
   var newSession = {};
@@ -305,9 +318,11 @@ exports.delete = function (req, res) {
 
 // Handle delete actions
 exports.force_delete = function (req, res) {
-  
-  
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   Participant.deleteOne(
     {
       _id: req.params.id,

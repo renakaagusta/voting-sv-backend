@@ -102,7 +102,11 @@ exports.view = function (req, res) {
 
 // Handle update actions
 exports.update = function (req, res) {
- 
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   
   Setting.findOneAndUpdate(
     { _id: req.params.id },
@@ -140,7 +144,11 @@ exports.update = function (req, res) {
 // Handle upload actions
 exports.upload = function (req, res) {
   
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   upload(req, res, (err) => {
     if (err) throw err;
 
@@ -152,7 +160,11 @@ exports.upload = function (req, res) {
 
 // Handle delete actions
 exports.delete = function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   
   Setting.remove(
     {
