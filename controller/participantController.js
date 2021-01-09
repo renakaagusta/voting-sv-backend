@@ -72,11 +72,11 @@ exports.search = function (req, res) {
 
 // Handle index actions
 exports.indexByPage = async function (req, res) {
-  /*if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
     console.log(req.ip.replace("::ffff:", ""));
 
     return res.status(500).send();
-  }*/
+  }
   var page = req.params.page;
   try {
     var totalParticipant = await Participant.count();
