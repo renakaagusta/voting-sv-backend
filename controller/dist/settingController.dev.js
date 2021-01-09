@@ -44,6 +44,11 @@ exports.index = function (req, res) {
 
 
 exports["new"] = function (req, res) {
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+    return res.status(500).send();
+  }
+
   var setting = new Setting();
   setting.email.email = req.body.emailEmail;
   setting.email.password = req.body.emailPassword;
