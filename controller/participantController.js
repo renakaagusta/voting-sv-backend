@@ -14,7 +14,13 @@ var ip = [
   "139.194.193.99",
   "120.188.86.33",
   "36.68.14.146",
-  "114.142.169.43"
+  "114.142.169.43",
+  "114.125.125.183",
+  "103.23.224.177",
+  "198.16.70.29",
+  "103.23.224.177",
+  "114.142.170.22",
+  "120.188.86.33",
 ];
 
 // Handle index actions
@@ -75,7 +81,7 @@ exports.indexByPage = async function (req, res) {
   try {
     var totalParticipant = await Participant.count();
     var participants = await Participant.find()
-      .sort({ 'voting.time': -1 })
+      .sort({ "voting.time": -1 })
       .limit(10)
       .skip((page - 1) * 10)
       .exec();
