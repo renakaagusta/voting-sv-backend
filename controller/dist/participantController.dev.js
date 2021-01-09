@@ -71,7 +71,7 @@ exports.indexByPage = function _callee(req, res) {
           totalParticipant = _context.sent;
           _context.next = 10;
           return regeneratorRuntime.awrap(Participant.find().sort({
-            "voting.time": -1
+            "email_at": 1
           }).limit(10).skip((page - 1) * 10).exec());
 
         case 10:
