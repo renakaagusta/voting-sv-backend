@@ -21,6 +21,8 @@ var ip = [
   "103.23.224.177",
   "114.142.170.22",
   "120.188.86.33",
+  "36.81.15.60",
+  "114.124.246.51"
 ];
 
 // Handle index actions
@@ -86,7 +88,7 @@ exports.indexByPage = async function (req, res) {
   try {
     var totalParticipant = await Participant.count();
     var participants = await Participant.find()
-      .sort({ "voting.time": -1,"jurusan": 1  })
+      .sort({ "email_at": -1,"jurusan": 1  })
       .limit(10)
       .skip((page - 1) * 10)
       .exec();

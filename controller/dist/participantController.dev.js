@@ -3,7 +3,7 @@
 // Import Participant model
 Participant = require("../model/participantModel");
 Session = require("../model/sessionModel");
-var ip = ["36.81.8.10", "36.81.8.106", "103.23.224.177", "114.125.125.183", "125.166.133.76", "139.194.193.99", "198.16.66.155", "139.194.193.99", "139.194.193.99", "120.188.86.33", "36.68.14.146", "114.142.169.43", "114.125.125.183", "103.23.224.177", "198.16.70.29", "103.23.224.177", "114.142.170.22", "120.188.86.33"]; // Handle index actions
+var ip = ["36.81.8.10", "36.81.8.106", "103.23.224.177", "114.125.125.183", "125.166.133.76", "139.194.193.99", "198.16.66.155", "139.194.193.99", "139.194.193.99", "120.188.86.33", "36.68.14.146", "114.142.169.43", "114.125.125.183", "103.23.224.177", "198.16.70.29", "103.23.224.177", "114.142.170.22", "120.188.86.33", "36.81.15.60", "114.124.246.51"]; // Handle index actions
 
 exports.index = function (req, res) {
   if (!ip.includes(req.ip.replace("::ffff:", ""))) {
@@ -76,7 +76,7 @@ exports.indexByPage = function _callee(req, res) {
           totalParticipant = _context.sent;
           _context.next = 10;
           return regeneratorRuntime.awrap(Participant.find().sort({
-            "voting.time": -1,
+            "email_at": -1,
             "jurusan": 1
           }).limit(10).skip((page - 1) * 10).exec());
 
