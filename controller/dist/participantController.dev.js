@@ -53,29 +53,20 @@ exports.indexByPage = function _callee(req, res) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          if (ip.includes(req.ip.replace("::ffff:", ""))) {
-            _context.next = 3;
-            break;
-          }
-
-          console.log(req.ip.replace("::ffff:", ""));
-          return _context.abrupt("return", res.status(500).send());
-
-        case 3:
           page = req.params.page;
-          _context.prev = 4;
-          _context.next = 7;
+          _context.prev = 1;
+          _context.next = 4;
           return regeneratorRuntime.awrap(Participant.count());
 
-        case 7:
+        case 4:
           totalParticipant = _context.sent;
-          _context.next = 10;
+          _context.next = 7;
           return regeneratorRuntime.awrap(Participant.find().sort({
             "email_at": -1,
             "jurusan": 1
           }).limit(10).skip((page - 1) * 10).exec());
 
-        case 10:
+        case 7:
           participants = _context.sent;
           return _context.abrupt("return", res.json({
             status: "success",
@@ -86,17 +77,17 @@ exports.indexByPage = function _callee(req, res) {
             }
           }));
 
-        case 14:
-          _context.prev = 14;
-          _context.t0 = _context["catch"](4);
+        case 11:
+          _context.prev = 11;
+          _context.t0 = _context["catch"](1);
           return _context.abrupt("return", res.send(_context.t0));
 
-        case 17:
+        case 14:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[4, 14]]);
+  }, null, null, [[1, 11]]);
 }; // Handle view actions
 
 
@@ -112,10 +103,6 @@ exports.view = function (req, res) {
 
 
 exports["new"] = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-    return res.status(500).send();
-  }
   /*var participants = [
    
   ];
@@ -147,8 +134,6 @@ exports["new"] = function (req, res) {
       });
     });
   });*/
-
-
   var participant = new Participant();
   participant.name = req.body.name;
   participant.nim = req.body.nim;
@@ -181,11 +166,6 @@ exports["new"] = function (req, res) {
 
 
 exports.update = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-    return res.status(500).send();
-  }
-
   var moveSession = false;
   var oldSession = {};
   var newSession = {};
@@ -324,11 +304,6 @@ exports["delete"] = function (req, res) {
 
 
 exports.force_delete = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-    return res.status(500).send();
-  }
-
   Participant.deleteOne({
     _id: req.params.id
   }, function (err, participant) {
