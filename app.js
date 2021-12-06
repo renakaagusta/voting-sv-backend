@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+const cloudinary = require('cloudinary').v2
+
 
 var mainRouter = require('./routes/mainRouter');
 var participantRouter = require('./routes/participantRouter');
@@ -12,6 +14,11 @@ var sessionRouter = require('./routes/sessionRouter');
 var settingRouter = require('./routes/settingRouter');
 var mailRouter = require('./routes/mailRouter');
 
+cloudinary.config({
+    cloud_name: 'dmjdk8qrw',
+    api_key: '541163795566548',
+    api_secret: 'ML2n7mcn6zaDIMWeuToN7Hs2-rY'
+});
 
 // Import body parse
 let bodyParser = require('body-parser');
@@ -19,9 +26,9 @@ let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 
 // Connect to mongoose and set connection variable 
-mongoose.connect('mongodb://127.0.0.1:27017/voting', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://root:root@cluster0.rjs6o.mongodb.net/voting-sv?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
-                                                                                                                                                          
+
 var app = express();
 
 // view engine setup
@@ -40,7 +47,7 @@ app.options('*', cors());
 
 // Body parse setup to handle post request
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 
 app.use(bodyParser.json());
@@ -54,18 +61,18 @@ app.use('/api/v1', mainRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;

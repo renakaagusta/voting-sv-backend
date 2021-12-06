@@ -14,9 +14,6 @@ var candidateSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    jurusan: {
-        type: String,
-    },
     image: {
         type: String,
         required: true,

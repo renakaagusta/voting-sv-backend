@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
 
-// Setup schema
 var participantSchema = mongoose.Schema({
+    /*_id: {
+        type: String,
+    },*/
     name: {
         type: String,
         required: true
@@ -13,7 +15,7 @@ var participantSchema = mongoose.Schema({
     email: {
         type: String,
     },
-    jurusan: {
+    subject: {
         type: String,
     },
     email_at: {
@@ -31,7 +33,7 @@ var participantSchema = mongoose.Schema({
         },
         counted: {
             type: Number,
-        } 
+        }
     },
     session: {
         id: {
@@ -55,6 +57,6 @@ var participantSchema = mongoose.Schema({
 
 var Participant = module.exports = mongoose.model('participant', participantSchema);
 
-module.exports.get = function (callback, limit) {
+module.exports.get = function(callback, limit) {
     Participant.find(callback).limit(limit);
 }
