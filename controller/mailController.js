@@ -63,15 +63,10 @@ exports.send = function (req, res) {
             subject: "PEMILU SV UNS 2021",
             html: "<h1>Halo " +
                 req.body.name +
-                "</h1><p>Kami mengundang anda untuk mengikuti PEMILU SV UNS 2021. Berikut kami lampirkan kartu pemilihan anda beserta dengan tata cara pemilihan.</p>",
+                "</h1><p>Kami mengundang anda untuk mengikuti PEMILU SV UNS 2021. Berikut kami lampirkan kartu pemilihan yang diperlukan untuk melakukan pemilihan.</p>",
                 attachments: [{
                     filename: "Kartu Pemilihan_" + req.body.name + ".png",
                     content: votingCardImage,
-                },
-                {
-                    filename: "Tata Cara Pemilihan PEMILU SV UNS 2021.pdf",
-                    contentType: "application/pdf",
-                    path: "https://voting-sv-backend.herokuapp.com/procedure.pdf",
                 },
             ],
 
