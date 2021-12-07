@@ -6,6 +6,12 @@ var logger = require('morgan');
 var cors = require('cors');
 const cloudinary = require('cloudinary').v2
 
+var app = express();
+
+//cors
+app.use(cors());
+app.options('*', cors());
+
 
 var mainRouter = require('./routes/mainRouter');
 var participantRouter = require('./routes/participantRouter');
@@ -29,8 +35,6 @@ let mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://root:root@cluster0.rjs6o.mongodb.net/voting-sv?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 
-var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -40,17 +44,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-//cors
-app.use(cors());
-app.options('*', cors());
-app.get('/', function(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 // Body parse setup to handle post request
 app.use(bodyParser.urlencoded({
