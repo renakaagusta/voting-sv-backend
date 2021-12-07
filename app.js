@@ -20,7 +20,6 @@ cloudinary.config({
     api_secret: 'ML2n7mcn6zaDIMWeuToN7Hs2-rY'
 });
 
-// Import body parse
 let bodyParser = require('body-parser');
 // Import mongoose
 let mongoose = require('mongoose');
