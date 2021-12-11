@@ -1,38 +1,10 @@
 // Import Candidate model
 Candidate = require("../model/candidateModel");
-
+Ip = require("../model/ipModel");
 var multer = require("multer");
 var path = require("path");
 
 var id = "";
-
-var ip = [
-    "36.81.8.39",
-    "115.178.245.1",
-    "120.188.87.161",
-    "182.2.70.49",
-    "36.82.16.96",
-    "182.1.113.100",
-    "36.72.212.123",
-    "180.242.214.231",
-    "182.2.41.152",
-    "182.0.198.123",
-    "36.65.160.63",
-    "182.2.40.27",
-    "36.74.208.155",
-    "182.2.71.32",
-    "182.0.237.81",
-    "103.79.154.187",
-    "114.5.109.44",
-    "182.2.37.131",
-    "120.188.74.160",
-    "182.2.39.180",
-    "36.73.209.231",
-    "36.81.10.12",
-    "180.252.99.137",
-    "112.215.240.127",
-    "202.80.218.42"
-];
 
 const storage = multer.diskStorage({
     destination: path.join(__dirname + "./../public"),
@@ -69,7 +41,12 @@ exports.index = function(req, res) {
 
 // Handle create actions
 exports.new = function(req, res) {
+    const clientIP = 
+    req.headers['x-forwarded-for'] ||
+    req.socket.remoteAddress ||
+    null;
 
+    
     var candidate = new Candidate();
     candidate.type = req.body.type;
     candidate.name = req.body.name;
@@ -93,7 +70,11 @@ exports.new = function(req, res) {
 
 // Handle view actions
 exports.view = function(req, res) {
-    console.log(req.params)
+    const clientIP = 
+    req.headers['x-forwarded-for'] ||
+    req.socket.remoteAddress ||
+    null;
+    console.log(clientIP)
     Candidate.findById(req.params.id, function(err, candidate) {
         if (err) return res.send(err);
         return res.json({

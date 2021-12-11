@@ -114,6 +114,7 @@ function escapeRegExp(string) {
 
 // Handle view actions
 exports.view = function (req, res) {
+    console.log(req.params.id.length)
     if (req.params.id.length < 50) {
         console.log("..oops")
         const id = mongoose.Types.ObjectId(req.params.id)
